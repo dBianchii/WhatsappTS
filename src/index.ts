@@ -1,10 +1,12 @@
-import fs from "fs";
+import express from "express";
+import body_parser from "body-parser";
 
-const generateTxtFile = (data: string) => {
-  fs.writeFile("output.txt", data, (err) => {
-    if (err) throw err;
-    console.log("The file has been saved!");
-  });
-};
+const app = express().use(body_parser.json());
 
-generateTxtFile("Hello World!");
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
